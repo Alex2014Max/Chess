@@ -3,7 +3,7 @@
 Game::Game(void)
 {
 	k=true;
-	stepI=0;
+	stepI=-10;
 	iControl[0]=new IUser;
 	iControl[1]=new IPC;
 	player[0]=new Player(iControl[0]);
@@ -118,6 +118,39 @@ void Game::SetCoords(bool _p)
 		fin.close();
 	}
 }
+void Game::SetAndDrawShapes(int _coord[2][32], int _index, RenderWindow& window)
+{
+	if((_index>=0)&&(_index<=7))
+	{
+		figure[0]->SetCoordsShapes(coord, _index);
+		figure[0]->DrawShapes(window);
+	}
+	if((_index==8)||(_index==15))
+	{
+		figure[1]->SetCoordsShapes(coord, _index);
+		figure[1]->DrawShapes(window);
+	}
+	if((_index==9)||(_index==14))
+	{
+		figure[2]->SetCoordsShapes(coord, _index);
+		figure[2]->DrawShapes(window);
+	}
+	if((_index==10)||(_index==13))
+	{
+		figure[3]->SetCoordsShapes(coord, _index);
+		figure[3]->DrawShapes(window);
+	}
+	if(_index==11)
+	{
+		figure[4]->SetCoordsShapes(coord, _index);
+		figure[4]->DrawShapes(window);
+	}
+	if(_index==12)
+	{
+		figure[5]->SetCoordsShapes(coord, _index);
+		figure[5]->DrawShapes(window);
+	}
+}
 void Game::SetPole()
 {
 	for(int i=0;i<32;i++)
@@ -137,11 +170,16 @@ void Game::DrawPole(RenderWindow& window,int _i)
 	window.display();
 	if(k)
 	{
-		Figure fig;
-		player[0]->SetShape(sFig[_i].getPosition().x-9,sFig[_i].getPosition().y);
-		fig.SetCoordsShapes(coord);
+		if(stepI!=-10)
+		{
+			player[0]->SetShape(sFig[_i].getPosition().x-9,sFig[_i].getPosition().y);
+		}
+		else
+		{
+			player[0]->SetShape(-100,-100);
+		}
 		player[0]->DrawShape(window);
-		fig.DrawShapes(window);
+		SetAndDrawShapes(coord, _i, window);
 	}
 	else
 	{
@@ -171,6 +209,7 @@ void Game::GameMenu(RenderWindow& window)
 void Game::Step(bool _step)
 {
 	player[_step]->Step(coord,figure);
+	SetCoords(true);
 }
 void Game::MBPressed(bool _step, RenderWindow& window)
 {

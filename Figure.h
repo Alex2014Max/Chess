@@ -4,12 +4,19 @@
 
 class Figure : public IStep
 {
-	bool poleShape[8][8];
+	bool** poleShape;
+	int kShape;
 public:
 	Figure(void);
 	~Figure(void);
 
-	void SetCoordsShapes(int _coord[2][32]);
-	void DrawShapes(RenderWindow& window);
+#pragma region SetShape
+	virtual void SetCoordsShapes(int _coord[2][32], int _index)=0;
+	virtual void DrawShapes(RenderWindow& window)=0;
+	void SetBool();
+	void SetBool(int _i, int _j, bool _p);
+	bool** GetBool();
+	int GetKShape();
+#pragma endregion
 };
 

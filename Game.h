@@ -48,6 +48,7 @@ public:
 #pragma endregion
 #pragma region step
 	void Step(bool _step);
+	void SetAndDrawShapes(int _coord[2][32], int _index, RenderWindow& window);
 	void MBPressed(bool _step,RenderWindow& window);
 #pragma endregion
 };
