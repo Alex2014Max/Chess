@@ -21,10 +21,10 @@ void Horse::SetCoordsShapes(int _coord[2][32], int _index)
 			   ((i==_coord[0][_index]-2)&&(j==_coord[1][_index]+1))||
 			   ((i==_coord[0][_index]+2)&&(j==_coord[1][_index]-1))||
 			   ((i==_coord[0][_index]+2)&&(j==_coord[1][_index]+1))||
-			   ((j==_coord[1][_index]-2)&&(i==_coord[1][_index]-1))||
-			   ((j==_coord[1][_index]-2)&&(i==_coord[1][_index]+1))||
-			   ((j==_coord[1][_index]+2)&&(i==_coord[1][_index]-1))||
-			   ((j==_coord[1][_index]+2)&&(i==_coord[1][_index]+1)))
+			   ((j==_coord[1][_index]-2)&&(i==_coord[0][_index]-1))||
+			   ((j==_coord[1][_index]-2)&&(i==_coord[0][_index]+1))||
+			   ((j==_coord[1][_index]+2)&&(i==_coord[0][_index]-1))||
+			   ((j==_coord[1][_index]+2)&&(i==_coord[0][_index]+1)))
 			{
 				SetBool(i,j,true);
 			}
