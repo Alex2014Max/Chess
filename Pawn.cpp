@@ -12,11 +12,21 @@ Pawn::~Pawn(void)
 
 void Pawn::SetCoordsShapes(int _coord[2][32], int _index)
 {
-	SetBool();
-	SetBool(_coord[0][_index],_coord[1][_index]+1,true);
+	SetBoolAndColor();
+	SetBool(_coord[0][_index],_coord[1][_index]+1,!ExistenceBlack(_coord,_coord[0][_index],_coord[1][_index]+1));
 	if(_coord[1][_index]==1)
 	{
-		SetBool(_coord[0][_index],_coord[1][_index]+2,true);
+		SetBool(_coord[0][_index],_coord[1][_index]+2,!ExistenceBlack(_coord,_coord[0][_index],_coord[1][_index]+2));
+	}
+	if(ExistenceBlack(_coord, _coord[0][_index]-1, _coord[1][_index]+1))
+	{
+		SetBool(_coord[0][_index]-1,_coord[1][_index]+1,true);
+		SetColor(_coord[0][_index]-1,_coord[1][_index]+1,true);
+	}
+	if(ExistenceBlack(_coord, _coord[0][_index]+1, _coord[1][_index]+1))
+	{
+		SetBool(_coord[0][_index]+1,_coord[1][_index]+1,true);
+		SetColor(_coord[0][_index]+1,_coord[1][_index]+1,true);
 	}
 }
 void Pawn::DrawShapes(RenderWindow& window)
@@ -38,6 +48,8 @@ void Pawn::DrawShapes(RenderWindow& window)
 			if(GetBool()[i][j])
 			{
 				sShape[k1].setPosition(72+(i*72),576-(j*72));
+				if(!GetColor()[i][j]) sShape[k1].setColor(Color::Blue);
+				if(GetColor()[i][j]) sShape[k1].setColor(Color::Red);
 				//cout << k1 << ". " << sShape[k1].getPosition().x << "\t" << sShape[k1].getPosition().y << "\n";
 				k1++;
 			}

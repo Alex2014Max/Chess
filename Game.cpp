@@ -196,6 +196,7 @@ void Game::GameMenu(RenderWindow& window)
 	if(menu.pMenu)
 	{
 		menu.BMenu(window);
+		stepI=-10;
 		if(menu.pGame&&!menu.pContinue)
 		{
 			return;

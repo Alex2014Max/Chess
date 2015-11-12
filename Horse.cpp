@@ -12,7 +12,7 @@ Horse::~Horse(void)
 
 void Horse::SetCoordsShapes(int _coord[2][32], int _index)
 {
-	SetBool();
+	SetBoolAndColor();
 	for(int i=0;i<8;i++)
 	{
 		for(int j=0;j<8;j++)
@@ -28,6 +28,8 @@ void Horse::SetCoordsShapes(int _coord[2][32], int _index)
 			{
 				SetBool(i,j,true);
 			}
+			if(ExistenceWhite(_coord, i, j)) SetColor(i,j,false);
+			if(ExistenceBlack(_coord, i, j)) SetColor(i,j,true);
 		}
 	}
 }
@@ -50,6 +52,8 @@ void Horse::DrawShapes(RenderWindow& window)
 			if(GetBool()[i][j])
 			{
 				sShape[k1].setPosition(72+(i*72),576-(j*72));
+				if(!GetColor()[i][j]) sShape[k1].setColor(Color::Blue);
+				if(GetColor()[i][j]) sShape[k1].setColor(Color::Red);
 				//cout << k1 << ". " << sShape[k1].getPosition().x << "\t" << sShape[k1].getPosition().y << "\n";
 				k1++;
 			}
